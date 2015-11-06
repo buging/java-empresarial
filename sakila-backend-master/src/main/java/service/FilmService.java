@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import facade.FilmFacade;
+import model.Actor;
 import model.Film;
 
 @Path("/films")
@@ -34,6 +35,13 @@ public class FilmService {
     @Produces({"application/xml", "application/json"})
     public Film find(@PathParam("id") Integer id) {
         return filmFacadeEJB.find(id);
+    }
+	
+	@GET
+    @Path("{id}/actors")
+    @Produces({"application/xml", "application/json"})
+    public List<Actor> find_films(@PathParam("id") Integer id) {
+        return filmFacadeEJB.find(id).sacarActors();
     }
 	
 	@POST
